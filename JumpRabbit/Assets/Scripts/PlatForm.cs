@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PlatForm : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private BoxCollider2D col = null;
+    [SerializeField] private SpriteRenderer srdr = null;
 
-    // Update is called once per frame
-    void Update()
+    public void Activate(Vector2 pos)
     {
-        
+        transform.position = pos;
     }
 }
