@@ -22,12 +22,19 @@ public class PlatFormManager : MonoBehaviour
     public void Activate()
     {
         PlatForm[] platFormClassArr = platformsDic[2];
-
-        var randID =  Random.RandomRange(0, platFormClassArr.Length);
-        PlatForm randPlatForm =  platFormClassArr[randID];
-
-        PlatForm platformClass =  GameObject.Instantiate<PlatForm>(randPlatForm);
         Vector2 _pos = spawnPosTrf.position;
-        platformClass.Activate(_pos);
+
+
+        for (int i = 0; i < 5; i++)
+        {
+            var randID = Random.Range(0, platFormClassArr.Length);
+            PlatForm randPlatForm = platFormClassArr[randID];
+
+            PlatForm platformClass = GameObject.Instantiate<PlatForm>(randPlatForm);
+
+            platformClass.Activate(_pos);
+
+            _pos += Vector2.right * 6f;
+        }
     }
 }
