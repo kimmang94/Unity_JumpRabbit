@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Rigidbody2D _rigid = null;
+    [SerializeField] protected float jumpPower = 1f;
+    public void Init()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            _rigid.AddForce(Vector2.one * 0.5f * jumpPower);
+        }
     }
 }
