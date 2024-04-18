@@ -244,6 +244,32 @@ MonoBehaviour:
   - {fileID: 8797237413044888862, guid: 07818c97e0dc59946af9ad94ce66dfcb, type: 3}
   - {fileID: 8797237413044888862, guid: e4bb187de9e905a46878121b12cc980c, type: 3}
   - {fileID: 8797237413044888862, guid: d1c6ce48f664b1644b91bc7c336a3e44, type: 3}
+  dataArr:
+  - conditionNum: 12
+    percentArr:
+    - 0
+    - 0
+    - 1
+  - conditionNum: 9
+    percentArr:
+    - 0
+    - 1
+    - 0
+  - conditionNum: 6
+    percentArr:
+    - 1
+    - 0
+    - 0
+  - conditionNum: 3
+    percentArr:
+    - 0
+    - 0.25
+    - 0.75
+  - conditionNum: 0
+    percentArr:
+    - 0
+    - 0
+    - 1
 --- !u!4 &382481144
 Transform:
   m_ObjectHideFlags: 0

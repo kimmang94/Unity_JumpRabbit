@@ -9,6 +9,8 @@ public class PlatFormManager : MonoBehaviour
     [SerializeField] private PlatForm[] mediumPlatformClassArr = null;
     [SerializeField] private PlatForm[] largePlatformClassArr = null;
 
+    private int platformNum;
+    [SerializeField] private Data[] dataArr = null;
     private Dictionary<int, PlatForm[]> platformsDic; 
     public void Init()
     {
@@ -21,53 +23,65 @@ public class PlatFormManager : MonoBehaviour
 
     public void Activate()
     {
-
-        // 대형
-        PlatForm[] platFormClassArr = platformsDic[2];
         Vector2 _pos = spawnPosTrf.position;
 
-
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 15; i++)
         {
-            var randID = Random.Range(0, platFormClassArr.Length);
-            PlatForm randPlatForm = platFormClassArr[randID];
+            int _platformID = -1;
 
-            PlatForm platformClass = GameObject.Instantiate<PlatForm>(randPlatForm);
+            foreach (Data _data in dataArr)
+            {
+                if (_data.TryGetPlatformID(platformNum, out _platformID) == true)
+                {
+                    break;
+                }
+            }
 
-            platformClass.Activate(_pos);
+            PlatForm[] _platformClassArr = platformsDic[_platformID];
+
+
+            int _randID = Random.Range(0, _platformClassArr.Length);
+            PlatForm _randPlatformClass = _platformClassArr[_randID];
+
+            PlatForm _platformClass = GameObject.Instantiate<PlatForm>(_randPlatformClass);
+            _platformClass.Activate(_pos);
 
             _pos += Vector2.right * 6f;
+
+            platformNum++;
         }
 
-        // 중형
-        platFormClassArr = platformsDic[1];
+    }
 
-        for (int i = 0; i < 5; i++)
+    [System.Serializable]
+    public class Data
+    {
+        [SerializeField] private int conditionNum;
+        [SerializeField] private float[] percentArr = new float[3];
+        public bool TryGetPlatformID(int _platformNum, out int platformID)
         {
-            var randID = Random.Range(0, platFormClassArr.Length);
-            PlatForm randPlatForm = platFormClassArr[randID];
+            if (conditionNum <= _platformNum)
+            {
+                float _value = Random.value;
 
-            PlatForm platformClass = GameObject.Instantiate<PlatForm>(randPlatForm);
+                for (int i = 0; i < percentArr.Length; i++)
+                {
+                    if (_value < percentArr[i])
+                    {
+                        platformID = i;
+                        return true;
+                    }
+                }
 
-            platformClass.Activate(_pos);
+                platformID = 0;
 
-            _pos += Vector2.right * 6f;
-        }
-
-        // 소형
-
-        platFormClassArr = platformsDic[0];
-
-        for (int i = 0; i < 5; i++)
-        {
-            var randID = Random.Range(0, platFormClassArr.Length);
-            PlatForm randPlatForm = platFormClassArr[randID];
-
-            PlatForm platformClass = GameObject.Instantiate<PlatForm>(randPlatForm);
-
-            platformClass.Activate(_pos);
-
-            _pos += Vector2.right * 6f;
+                return true;
+            }
+            else
+            {
+                platformID = -1;
+                return false;
+            }
         }
     }
 }
