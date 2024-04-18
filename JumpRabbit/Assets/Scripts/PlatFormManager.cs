@@ -21,9 +21,42 @@ public class PlatFormManager : MonoBehaviour
 
     public void Activate()
     {
+
+        // 대형
         PlatForm[] platFormClassArr = platformsDic[2];
         Vector2 _pos = spawnPosTrf.position;
 
+
+        for (int i = 0; i < 5; i++)
+        {
+            var randID = Random.Range(0, platFormClassArr.Length);
+            PlatForm randPlatForm = platFormClassArr[randID];
+
+            PlatForm platformClass = GameObject.Instantiate<PlatForm>(randPlatForm);
+
+            platformClass.Activate(_pos);
+
+            _pos += Vector2.right * 6f;
+        }
+
+        // 중형
+        platFormClassArr = platformsDic[1];
+
+        for (int i = 0; i < 5; i++)
+        {
+            var randID = Random.Range(0, platFormClassArr.Length);
+            PlatForm randPlatForm = platFormClassArr[randID];
+
+            PlatForm platformClass = GameObject.Instantiate<PlatForm>(randPlatForm);
+
+            platformClass.Activate(_pos);
+
+            _pos += Vector2.right * 6f;
+        }
+
+        // 소형
+
+        platFormClassArr = platformsDic[0];
 
         for (int i = 0; i < 5; i++)
         {
