@@ -71,6 +71,10 @@ public class PlatFormManager : MonoBehaviour
                         platformID = i;
                         return true;
                     }
+                    else
+                    {
+                        _value -= percentArr[i];
+                    }
                 }
 
                 platformID = 0;
